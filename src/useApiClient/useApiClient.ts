@@ -1,6 +1,6 @@
 import {
   inject, provide, reactive, getCurrentInstance,
-} from 'vue';
+} from 'vue-demi';
 
 import { ApiClientConfig } from './interfaces';
 

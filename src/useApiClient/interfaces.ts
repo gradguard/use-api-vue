@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
-import { onUnmounted } from 'vue';
+import { onUnmounted } from 'vue-demi';
 
 export interface ConfigOptions extends AxiosRequestConfig {
-    onCancelCallback: typeof onUnmounted;
+    onCancelCallback?: typeof onUnmounted;
   }
 
   interface KeyValue {

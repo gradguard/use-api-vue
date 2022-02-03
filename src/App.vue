@@ -11,7 +11,7 @@
   <router-view />
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue-demi';
 
 import { useApiProvider } from './useApiClient/useApiClient';
 import apiConfig from './interfaces/apiConfig';
