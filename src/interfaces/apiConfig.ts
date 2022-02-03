@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import ErrorResponse from './ErrorResponse';
-
 import { ApiClientConfig } from '@/useApiClient/interfaces';
 import { getArrayBufferError } from '@/useApiClient';
 

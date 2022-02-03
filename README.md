@@ -1,10 +1,16 @@
 # use-api-vue
 
-Typescript class to work with AJAX requests. In order to use do the folowing steps:
+Typescript functions to work with AJAX requests.
+
+Support for Vue 2.x via [vue-demi](https://github.com/vueuse/vue-demi).
+
+## Install
+
+`npm i use-api-vue`
 
 ## 1. Configure Provider
 
-Add `useApiProvider` to the main component. And configure the global variables:
+Add `useApiProvider` to the main component ([example](https://github.com/gradguard/use-api-vue/blob/main/src/App.vue) [here](https://github.com/gradguard/use-api-vue/blob/main/src/interfaces/apiConfig.ts)). And configure the global variables:
 - extraPostData: To add extra data in each `POST` request.
 - onError: To execute a function in each exception.
 - getError: Convert exceptions to your custom exception format.

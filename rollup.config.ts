@@ -8,6 +8,7 @@ const common = {
   external: [
     'axios',
     'qs',
+    'vue-demi',
     'vue',
   ],
   watch: {

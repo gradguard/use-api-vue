@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onUnmounted } from 'vue';
+import { defineComponent, onUnmounted } from 'vue-demi';
 
 import { useGetRef } from '@/useApiClient/useApiRef';
 import PostPros from '@/server_js/post';

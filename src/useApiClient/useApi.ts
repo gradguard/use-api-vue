@@ -20,16 +20,18 @@ export const getArrayBufferError = <T=unknown, D=unknown>(error: AxiosError): Ax
   };
 };
 
-export default function useApi(method: Method, setupConfig: ConfigOptions) {
+export default function useApi(method: Method, setupConfig?: ConfigOptions) {
   const {
     extraPostData,
     onError,
     getError,
     requestConfig: globalConfig,
   } = useApiClient();
-  const { onCancelCallback, ...axiosSetupConfig } = setupConfig;
+  const { onCancelCallback, ...axiosSetupConfig } = setupConfig ?? {};
   const cancelToken = axios.CancelToken.source();
-  onCancelCallback(() => cancelToken.cancel());
+  if (onCancelCallback) {
+    onCancelCallback(() => cancelToken.cancel());
+  }
   async function api<Data = unknown, Params = unknown>(
     url: string, params?: Params, config?: AxiosRequestConfig,
   ) {
@@ -68,10 +70,10 @@ export default function useApi(method: Method, setupConfig: ConfigOptions) {
   return api;
 }
 
-export const useGet = (config: ConfigOptions) => useApi('get', config);
+export const useGet = (config?: ConfigOptions) => useApi('get', config);
 
-export const usePost = (config: ConfigOptions) => useApi('post', config);
+export const usePost = (config?: ConfigOptions) => useApi('post', config);
 
-export const usePut = (config: ConfigOptions) => useApi('put', config);
+export const usePut = (config?: ConfigOptions) => useApi('put', config);
 
-export const useDelete = (config: ConfigOptions) => useApi('delete', config);
+export const useDelete = (config?: ConfigOptions) => useApi('delete', config);
