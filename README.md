@@ -1,6 +1,6 @@
 # use-api-vue
 
-Typescript functions to work with AJAX requests.
+Typescript functions to work with AJAX requests and [vue-query](https://github.com/DamianOsipiuk/vue-query).
 
 Support for Vue 2.x via [vue-demi](https://github.com/vueuse/vue-demi).
 
@@ -17,9 +17,32 @@ Add `useApiProvider` to the main component ([example](https://github.com/gradgua
 - requestConfig: [AxiosRequestConfig](https://github.com/axios/axios/blob/master/index.d.ts#L76)
 
 
-## 2. Use hooks like
+## Using with Vue Query
+
+This package can be used with [vue-query](https://github.com/DamianOsipiuk/vue-query).
+
 ```typescript
-  const { data, error, loading, send } = useGetRef<PostProps[], ErrorFormat>({ onCancelCallback: onUnmounted });
+  import { usePost, ApiResponse } from 'use-api-vue';
+
+  const get = useGet({ onCancelCallback: onUnmounted });
+  const result = useQuery<ApiResponse<PostProps[]>, ErrorFormat>(
+    'posts',
+    () => get<PostProps[]>('/posts');
+  );
+  // ErrorFormat is defined in `getError` inside the `useApiProvider`
+```
+
+## Use hooks like
+
+The params `data`, `error`, `loading` are reactive. `send` function is not reactive.
+
+```typescript
+  import { useGetRef } from 'use-api-vue';
+
+  const get = useGet({ onCancelCallback: onUnmounted });
+  const { data, error, loading, send } = useGetRef<PostProps[], ErrorFormat>(
+    { onCancelCallback: onUnmounted },
+  );
   send<PostsParams>('/posts', { category: [1,2,3] }); // It will send a request to the server
   return {
     data,
@@ -27,14 +50,4 @@ Add `useApiProvider` to the main component ([example](https://github.com/gradgua
     loading,
     send,
   };
-```
-
-## Using with Vue Query
-
-This package can be used with [vue-query](https://github.com/DamianOsipiuk/vue-query).
-```typescript
-  const result = useQuery<AxiosResponse<PostProps[]>, ErrorFormat>(
-    'posts',
-    () => get<PostProps[]>('/posts');
-  );
 ```

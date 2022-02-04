@@ -1,7 +1,7 @@
-import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
+import axios, { AxiosError, Method } from 'axios';
 import qs from 'qs';
 
-import { ConfigOptions } from './interfaces';
+import { ApiRequestConfig, ApiResponse, ConfigOptions } from './interfaces';
 import { useApiClient } from './useApiClient';
 
 export const getArrayBufferError = <T=unknown, D=unknown>(error: AxiosError): AxiosError<T, D> => {
@@ -33,9 +33,9 @@ export default function useApi(method: Method, setupConfig?: ConfigOptions) {
     onCancelCallback(() => cancelToken.cancel());
   }
   async function api<Data = unknown, Params = unknown>(
-    url: string, params?: Params, config?: AxiosRequestConfig,
+    url: string, params?: Params, config?: ApiRequestConfig<Params>,
   ) {
-    const axiosConfig: AxiosRequestConfig = {
+    const axiosConfig: ApiRequestConfig<Params> = {
       cancelToken: cancelToken.token,
       paramsSerializer: (method === 'get') ? (parameters) => qs.stringify(parameters) : undefined,
       ...globalConfig,
@@ -55,7 +55,7 @@ export default function useApi(method: Method, setupConfig?: ConfigOptions) {
     }
 
     try {
-      return await axios.request<Data>(axiosConfig);
+      return await axios.request<Data, ApiResponse<Data, Params>, Params>(axiosConfig);
     } catch (error) {
       if (onError) {
         onError(error, axiosConfig);
