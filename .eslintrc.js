@@ -22,6 +22,7 @@ module.exports = {
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'import/no-unresolved': 'error',
+    "import/no-extraneous-dependencies": 'off',
     camelcase: [0],
     '@typescript-eslint/naming-convention': [
       'error',

@@ -1,27 +1,31 @@
-import { AxiosRequestConfig } from 'axios';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { onUnmounted } from 'vue-demi';
 
-export interface ConfigOptions extends AxiosRequestConfig {
-    onCancelCallback?: typeof onUnmounted;
-  }
+export type ApiResponse<Data=any, DataParams=any> = AxiosResponse<Data, DataParams>;
+export type ApiRequestConfig<DataParams=any> = AxiosRequestConfig<DataParams>;
 
-  interface KeyValue {
-    [key:string]: string | number | undefined;
-  }
+export interface ConfigOptions extends ApiRequestConfig {
+  onCancelCallback?: typeof onUnmounted;
+}
 
-  type requestConfigType = Omit<
-    AxiosRequestConfig,
-    'url' |
-    'method' |
-    'cancelToken' |
-    'params' |
-    'data' |
-    'paramsSerializer'
-  >
+interface KeyValue {
+  [key:string]: string | number | undefined;
+}
+
+type requestConfigType = Omit<
+ApiRequestConfig,
+  'url' |
+  'method' |
+  'cancelToken' |
+  'params' |
+  'data' |
+  'paramsSerializer'
+>
 
 export interface ApiClientConfig {
-    extraPostData?: (options: AxiosRequestConfig) => KeyValue;
-    onError?: (error: unknown, options: AxiosRequestConfig) => void;
-    getError?: (error: unknown, options: AxiosRequestConfig) => unknown;
-    requestConfig?: requestConfigType;
-  }
+  extraPostData?: (options: ApiRequestConfig) => KeyValue;
+  onError?: (error: unknown, options: ApiRequestConfig) => void;
+  getError?: (error: unknown, options: ApiRequestConfig) => unknown;
+  requestConfig?: requestConfigType;
+}

@@ -1,17 +1,17 @@
-import { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
+import { AxiosRequestConfig, Method } from 'axios';
 import { ref } from 'vue-demi';
 
-import { ConfigOptions } from './interfaces';
+import { ApiResponse, ConfigOptions } from './interfaces';
 import useApi from './useApi';
 
 const useApiRef = <Data = unknown, Error = unknown>(method: Method, config?: ConfigOptions) => {
   const error = ref<Error>();
   const loading = ref<boolean>(false);
-  const data = ref<AxiosResponse<Data>>();
+  const data = ref<ApiResponse<Data>>();
   const sendRequest = useApi(method, config);
   async function send<Params = unknown>(
     url: string, params?: Params, axiosConfig?: AxiosRequestConfig,
-  ): Promise<AxiosResponse<Data> | Error> {
+  ): Promise<ApiResponse<Data> | Error> {
     loading.value = true;
     error.value = undefined;
     try {
