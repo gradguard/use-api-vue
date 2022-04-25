@@ -20,13 +20,13 @@ export const getArrayBufferError = <T=unknown, D=unknown>(error: AxiosError): Ax
   };
 };
 
-export default function useApi(method: Method, setupConfig?: ConfigOptions) {
+export default function useApi(method: Method, setupConfig?: ConfigOptions, id = '') {
   const {
     extraPostData,
     onError,
     getError,
     requestConfig: globalConfig,
-  } = useApiClient();
+  } = useApiClient(id);
   const { onCancelCallback, ...axiosSetupConfig } = setupConfig ?? {};
   const cancelToken = axios.CancelToken.source();
   if (onCancelCallback) {
@@ -70,10 +70,10 @@ export default function useApi(method: Method, setupConfig?: ConfigOptions) {
   return api;
 }
 
-export const useGet = (config?: ConfigOptions) => useApi('get', config);
+export const useGet = (config?: ConfigOptions, id = '') => useApi('get', config, id);
 
-export const usePost = (config?: ConfigOptions) => useApi('post', config);
+export const usePost = (config?: ConfigOptions, id = '') => useApi('post', config, id);
 
-export const usePut = (config?: ConfigOptions) => useApi('put', config);
+export const usePut = (config?: ConfigOptions, id = '') => useApi('put', config, id);
 
-export const useDelete = (config?: ConfigOptions) => useApi('delete', config);
+export const useDelete = (config?: ConfigOptions, id = '') => useApi('delete', config, id);

@@ -4,11 +4,13 @@ import { ref } from 'vue-demi';
 import { ApiResponse, ConfigOptions } from './interfaces';
 import useApi from './useApi';
 
-const useApiRef = <Data = unknown, Error = unknown>(method: Method, config?: ConfigOptions) => {
+const useApiRef = <Data = unknown, Error = unknown>(
+  method: Method, config?: ConfigOptions, id = '',
+) => {
   const error = ref<Error>();
   const loading = ref<boolean>(false);
   const data = ref<ApiResponse<Data>>();
-  const sendRequest = useApi(method, config);
+  const sendRequest = useApi(method, config, id);
   async function send<Params = unknown>(
     url: string, params?: Params, axiosConfig?: AxiosRequestConfig,
   ): Promise<ApiResponse<Data> | Error> {
@@ -33,10 +35,18 @@ const useApiRef = <Data = unknown, Error = unknown>(method: Method, config?: Con
   };
 };
 
-export const useGetRef = <Data = unknown, Error = unknown>(config?: ConfigOptions) => useApiRef<Data, Error>('get', config);
+export const useGetRef = <Data = unknown, Error = unknown>(
+  config?: ConfigOptions, id = '',
+) => useApiRef<Data, Error>('get', config, id);
 
-export const usePostRef = <Data = unknown, Error = unknown>(config?: ConfigOptions) => useApiRef<Data, Error>('post', config);
+export const usePostRef = <Data = unknown, Error = unknown>(
+  config?: ConfigOptions, id = '',
+) => useApiRef<Data, Error>('post', config, id);
 
-export const usePutRef = <Data = unknown, Error = unknown>(config?: ConfigOptions) => useApiRef<Data, Error>('put', config);
+export const usePutRef = <Data = unknown, Error = unknown>(
+  config?: ConfigOptions, id = '',
+) => useApiRef<Data, Error>('put', config, id);
 
-export const useDeleteRef = <Data = unknown, Error = unknown>(config?: ConfigOptions) => useApiRef<Data, Error>('delete', config);
+export const useDeleteRef = <Data = unknown, Error = unknown>(
+  config?: ConfigOptions, id = '',
+) => useApiRef<Data, Error>('delete', config, id);

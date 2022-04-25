@@ -24,7 +24,7 @@ export const useApiClient = (id = '') => {
   const apiClient = inject<ApiClientConfig>(USE_API_CLIENT + id);
   if (!apiClient) {
     throw new Error(
-      "No apiClient found in Vue context, use 'useApiProvider' to set one in the root component.",
+      `No apiClient ${USE_API_CLIENT + id} found in Vue context, use 'useApiProvider' to set one in the root component.`,
     );
   }
 

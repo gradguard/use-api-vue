@@ -20,6 +20,7 @@ export default defineComponent({
   name: 'App',
   setup() {
     useApiProvider(apiConfig);
+    useApiProvider(apiConfig, 'unique-id');
   },
 });
 </script>
