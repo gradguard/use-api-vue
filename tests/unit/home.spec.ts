@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 
 import Home from '@/pages/Home.vue';
 import apiConfig from '@/interfaces/apiConfig';
@@ -22,7 +22,7 @@ const options = {
 
 describe('Test data', () => {
   it('Home => Get all posts', async () => {
-    const wrapper = shallowMount(Home, options);
+    const wrapper = mount(Home, options);
     const btn = wrapper.find('#btn-get-posts');
     await btn.trigger('click');
     expect(wrapper.text()).toMatch('01Title');
