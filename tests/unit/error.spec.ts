@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 
 import Error from '@/pages/Error.vue';
 import apiConfig from '@/interfaces/apiConfig';
@@ -22,7 +22,7 @@ const options = {
 
 describe('Test data', () => {
   it('Error => Get error', async () => {
-    const wrapper = shallowMount(Error, options);
+    const wrapper = mount(Error, options);
     const btn = wrapper.find('#btn-get-error');
     await btn.trigger('click');
     expect(wrapper.text()).toMatch(message);
