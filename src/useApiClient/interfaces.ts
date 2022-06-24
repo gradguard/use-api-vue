@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { onUnmounted } from 'vue-demi';
 
 export type ApiResponse<Data=any, DataParams=any> = AxiosResponse<Data, DataParams>;
@@ -29,3 +29,6 @@ export interface ApiClientConfig {
   getError?: (error: unknown, options: ApiRequestConfig) => unknown;
   requestConfig?: requestConfigType;
 }
+
+// eslint-disable-next-line prefer-destructuring
+export const isCancel = axios.isCancel;
