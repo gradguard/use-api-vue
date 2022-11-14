@@ -7,8 +7,14 @@
   "description": "AJAX request for Vue 3 using global configuration",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "files": ["/build"],
-  "keywords": ["vue", "ajax", "axios"],
+  "files": [
+    "/build"
+  ],
+  "keywords": [
+    "vue",
+    "ajax",
+    "axios"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gradguard/use-api-vue.git"
@@ -21,14 +27,13 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@testing-library/vue": "^6.6.1",
     "axios": "^1.1.3",
-    "qs": "^6.11.0",
     "vue": "^3.2.41"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^9.0.2",
+    "@testing-library/vue": "^6.6.1",
     "@types/qs": "^6.9.7",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/test-utils": "^2.0.0-rc.18",

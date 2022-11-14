@@ -1,5 +1,4 @@
 import axios, { AxiosError, Method } from 'axios';
-import qs from 'qs';
 
 import { ApiRequestConfig, ApiResponse, ConfigOptions } from './interfaces';
 import { useApiClient } from './useApiClient';
@@ -39,11 +38,6 @@ export default function useApi(method: Method, setupConfig?: ConfigOptions, id =
   ) {
     const axiosConfig: ApiRequestConfig<Params> = {
       cancelToken: cancelToken.token,
-      paramsSerializer: {
-        encode: (method === 'get')
-          ? (parameters) => qs.stringify(parameters, { arrayFormat: 'repeat' })
-          : undefined,
-      },
       ...globalConfig,
       ...axiosSetupConfig,
       ...config,
