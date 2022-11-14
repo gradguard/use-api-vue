@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, Method } from 'axios';
-import { ref } from 'vue-demi';
+import { ref } from 'vue';
 
 import { ApiResponse, ConfigOptions } from './interfaces';
 import useApi from './useApi';

@@ -2,8 +2,6 @@
 
 Typescript functions to work with AJAX requests and [vue-query](https://github.com/DamianOsipiuk/vue-query).
 
-Support for Vue 2.x via [vue-demi](https://github.com/vueuse/vue-demi).
-
 ## Install
 
 `npm i use-api-vue`
@@ -15,7 +13,6 @@ Add `useApiProvider` to the main component ([example](https://github.com/gradgua
 - onError: To execute a function in each exception.
 - getError: Convert exceptions to your custom exception format.
 - requestConfig: [AxiosRequestConfig](https://github.com/axios/axios/blob/master/index.d.ts#L76)
-
 
 ## Using with Vue Query
 

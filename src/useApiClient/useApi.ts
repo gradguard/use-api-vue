@@ -4,11 +4,13 @@ import qs from 'qs';
 import { ApiRequestConfig, ApiResponse, ConfigOptions } from './interfaces';
 import { useApiClient } from './useApiClient';
 
-export const getArrayBufferError = <T=unknown, D=unknown>(error: AxiosError): AxiosError<T, D> => {
+export const getArrayBufferError = <Data=any, DataConfig=any>(
+  error: AxiosError<Data, DataConfig>,
+): AxiosError<Data, DataConfig> => {
   if (!error?.response?.data) {
     throw new Error('Server response null');
   }
-  const data = new Uint8Array(error.response.data);
+  const data = new Uint8Array();
   const decodedString = new TextDecoder().decode(data);
   const response = JSON.parse(decodedString);
   return {
@@ -37,7 +39,11 @@ export default function useApi(method: Method, setupConfig?: ConfigOptions, id =
   ) {
     const axiosConfig: ApiRequestConfig<Params> = {
       cancelToken: cancelToken.token,
-      paramsSerializer: (method === 'get') ? (parameters) => qs.stringify(parameters) : undefined,
+      paramsSerializer: {
+        encode: (method === 'get')
+          ? (parameters) => qs.stringify(parameters, { arrayFormat: 'repeat' })
+          : undefined,
+      },
       ...globalConfig,
       ...axiosSetupConfig,
       ...config,
@@ -48,10 +54,11 @@ export default function useApi(method: Method, setupConfig?: ConfigOptions, id =
     };
 
     if (extraPostData) {
-      axiosConfig.data = {
+      const newParams = {
         ...axiosConfig.data,
         ...extraPostData(axiosConfig),
-      };
+      } as Params;
+      axiosConfig.data = newParams;
     }
 
     try {
