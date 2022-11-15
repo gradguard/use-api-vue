@@ -1,5 +1,5 @@
 <template>
-  <button id="btn-get-posts" @click="() => send('posts')">
+  <button id="btn-get-posts" @click="() => send('/posts.json')">
     Get Posts
   </button>
   <div v-if="loading">
@@ -28,10 +28,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onUnmounted } from 'vue-demi';
+import { defineComponent, onUnmounted } from 'vue';
 
-import { useGetRef } from '@/useApiClient/useApiRef';
-import PostPros from '@/server_js/post';
+import { useGetRef } from '../useApiClient/useApiRef';
+import PostPros from '../interfaces/post';
 
 export default defineComponent({
   setup() {

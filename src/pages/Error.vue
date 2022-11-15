@@ -11,11 +11,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue-demi';
+import { defineComponent } from 'vue';
 
-import { useGetRef } from '@/useApiClient/useApiRef';
-import ErrorResponse from '@/interfaces/ErrorResponse';
-import PostPros from '@/server_js/post';
+import { useGetRef } from '../useApiClient/useApiRef';
+import ErrorResponse from '../interfaces/ErrorResponse';
+import PostPros from '../interfaces/post';
 
 export default defineComponent({
   setup() {

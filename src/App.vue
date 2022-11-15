@@ -1,32 +1,16 @@
 <template>
-  <div class="menu">
-    <router-link to="/">
-      Posts
-    </router-link>
-    |
-    <router-link to="/error">
-      Error
-    </router-link>
+  <div>
+    <Error />
+    <Posts />
   </div>
-  <router-view />
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue-demi';
 
+<script setup lang="ts">
 import { useApiProvider } from './useApiClient/useApiClient';
 import apiConfig from './interfaces/apiConfig';
+import Posts from './pages/Posts.vue';
+import Error from './pages/Error.vue';
 
-export default defineComponent({
-  name: 'App',
-  setup() {
-    useApiProvider(apiConfig);
-    useApiProvider(apiConfig, 'unique-id');
-  },
-});
+useApiProvider(apiConfig);
+useApiProvider(apiConfig, 'unique-id');
 </script>
-
-<style scoped>
-.menu {
-  margin-bottom: 20px;
-}
-</style>

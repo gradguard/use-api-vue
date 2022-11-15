@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { onUnmounted } from 'vue-demi';
+import { onUnmounted } from 'vue';
 
 export type ApiResponse<Data=any, DataParams=any> = AxiosResponse<Data, DataParams>;
 export type ApiRequestConfig<DataParams=any> = AxiosRequestConfig<DataParams>;

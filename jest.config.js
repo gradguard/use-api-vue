@@ -1,6 +1,13 @@
+// jest.config.js
 module.exports = {
-  preset: '@vue/cli-plugin-unit-jest/presets/typescript',
+  moduleFileExtensions: [
+    'js',
+    'ts',
+    'json',
+    'vue'
+  ],
   transform: {
-    '^.+\\.vue$': 'vue-jest',
-  },
-};
+    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.vue$': 'vue-jest'
+  }
+}

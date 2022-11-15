@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 import ErrorResponse from './ErrorResponse';
-import { ApiClientConfig } from '@/useApiClient/interfaces';
-import { getArrayBufferError } from '@/useApiClient';
+import { ApiClientConfig } from '../useApiClient/interfaces';
+import { getArrayBufferError } from '../useApiClient';
 
 const apiConfig: ApiClientConfig = {
   requestConfig: {
     withCredentials: false,
-    baseURL: '/api/',
+    baseURL: '/',
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getError: (e: any, options) => {

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 import dts from 'rollup-plugin-dts';
@@ -8,17 +7,16 @@ const common = {
   external: [
     'axios',
     'qs',
-    'vue-demi',
     'vue',
   ],
   watch: {
-    include: 'src/**',
+    include: './src/useApiClient/**',
     exclude: ['node_modules/**', 'tests'],
   },
 };
 export default [
   {
-    input: 'src/useApiClient/index.ts',
+    input: './src/useApiClient/index.ts',
     output: {
       dir: 'build',
       format: 'cjs',
@@ -27,7 +25,7 @@ export default [
     ...common,
   },
   {
-    input: 'src/useApiClient/index.ts',
+    input: './src/useApiClient/index.ts',
     output: {
       dir: 'build',
       format: 'esm',
