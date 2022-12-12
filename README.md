@@ -21,12 +21,17 @@ This package can be used with [vue-query](https://github.com/DamianOsipiuk/vue-q
 ```typescript
   import { usePost, ApiResponse } from 'use-api-vue';
 
-  const get = useGet({ onCancelCallback: onUnmounted });
+  // add this as global provider
+  useApiProvider({
+    getError: (error: any) => getError(error),
+  });
+
+  // In your component
+  const get = useGet();
   const result = useQuery<ApiResponse<PostProps[]>, ErrorFormat>(
     'posts',
     () => get<PostProps[]>('/posts');
   );
-  // ErrorFormat is defined in `getError` inside the `useApiProvider`
 ```
 
 ## Use hooks like
@@ -36,15 +41,15 @@ The params `data`, `error`, `loading` are reactive. `send` function is not react
 ```typescript
   import { useGetRef } from 'use-api-vue';
 
-  const get = useGet({ onCancelCallback: onUnmounted });
-  const { data, error, loading, send } = useGetRef<PostProps[], ErrorFormat>(
-    { onCancelCallback: onUnmounted },
-  );
-  send<PostsParams>('/posts', { category: [1,2,3] }); // It will send a request to the server
-  return {
-    data,
-    error,
-    loading,
-    send,
-  };
+  const { data, error, loading, send } = useGetRef<PostProps[], PostsParams, ErrorFormat>();
+  /**
+   * It will send a request to the server
+   * You can use `data` variable or response if you are using it inside of a function
+   */
+  const response = await send('/posts', { category: [1,2,3] });
+  if (response instanceof Error) {
+    console.log(response.message);
+  } else {
+    console.log(response.data);
+  }
 ```
