@@ -27,22 +27,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onUnmounted } from 'vue';
-
+<script setup lang="ts">
 import { useGetRef } from '../useApiClient/useApiRef';
 import PostPros from '../interfaces/post';
 
-export default defineComponent({
-  setup() {
-    const { data: posts, loading, send } = useGetRef<PostPros[]>({
-      onCancelCallback: onUnmounted,
-    });
-    return {
-      posts,
-      loading,
-      send,
-    };
-  },
-});
+const { data: posts, loading, send } = useGetRef<PostPros[], unknown, Error>();
 </script>

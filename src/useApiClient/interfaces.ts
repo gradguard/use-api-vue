@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axiosBase, * as axiosBaseTypes from 'axios';
 import { onUnmounted } from 'vue';
 
-export type ApiResponse<Data=any, DataParams=any> = AxiosResponse<Data, DataParams>;
-export type ApiRequestConfig<DataParams=any> = AxiosRequestConfig<DataParams>;
+export type ApiResponse<Data=any, DataParams=any> = axiosBaseTypes.AxiosResponse<Data, DataParams>;
+export type ApiRequestConfig<DataParams=any> = axiosBaseTypes.AxiosRequestConfig<DataParams>;
 
 export interface ConfigOptions extends ApiRequestConfig {
   onCancelCallback?: typeof onUnmounted;
@@ -30,5 +30,5 @@ export interface ApiClientConfig {
   requestConfig?: requestConfigType;
 }
 
-// eslint-disable-next-line prefer-destructuring
-export const isCancel = axios.isCancel;
+export const axios  = axiosBase;
+export const axiosTypes = axiosBaseTypes;
